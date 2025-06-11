@@ -28,7 +28,8 @@ int checkingForInput::getInteger(const string& prompt, int min, int max)
         string input;
         getline(cin, input);
 
-        try {
+        try
+        {
             if (input.empty())
             {
                 throw InputException("Ошибка: Пустой ввод. Пожалуйста, введите число.");
@@ -41,6 +42,14 @@ int checkingForInput::getInteger(const string& prompt, int min, int max)
                 {
                     throw InputException("Ошибка: Введены недопустимые символы. Пожалуйста, введите целое число.");
                 }
+            }
+            if (input.size() > 1 && input[0] == '0')
+            {
+                throw InputException("Ошибка: Число не может начинаться с нуля.");
+            }
+            if (input.size() > 1 && input[0] == '0')
+            {
+                throw InputException("Ошибка: Число не может начинаться с нуля.");
             }
 
             if (input.length() > 10 || (hasMinus && input.length() > 11)) // Проверка на слишком длинное число
@@ -91,7 +100,10 @@ int checkingForInput::getBallColor(int ballNumber)  // Статический метод для пол
             {
                 throw InputException("Ошибка: Пустой ввод. Пожалуйста, введите цвет шарика.");
             }
-
+            if (input.size() > 1 && input[0] == '0')
+            {
+                throw InputException("Ошибка: Число не может начинаться с нуля.");
+            }
             for (char c : input)
             {
                 if (!isdigit(c))
