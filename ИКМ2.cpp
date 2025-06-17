@@ -32,30 +32,32 @@
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);           
+    SetConsoleOutputCP(1251);     
 
-    try 
+    try
     {
         cout << "=== Игра 'Шарики' ===" << endl;
         cout << "Правила: при вводе цепочки из трех и более одинаковых шариков они удаляются." << endl << endl;
 
+        // Получаем количество шариков
         int n = checkingForInput::getInteger("Введите количество шариков (1-100000): ", 1, 100000);
 
-        LinkedList balls;
+        LinkedList balls; // Создаем список шариков
         cout << endl << "Введите цвета шариков (числа от 0 до 9):" << endl;
 
-        for (int i = 0; i < n; ++i) 
+        // Заполняем список
+        for (int i = 0; i < n; ++i)
         {
             int color = checkingForInput::getBallColor(i + 1);
             balls.push_back(color);
         }
 
-        BallRow chain(balls);
-        int removed = chain.findAndRemoveRow();
+        BallRow chain(balls); // Создаем цепочку шариков
+        int removed = chain.findAndRemoveRow(); // Обрабатываем цепочку
         cout << endl << "Количество уничтоженных шариков: " << removed << endl;
     }
-    catch (const exception& e) 
+    catch (const exception& e) // Обработка ошибок
     {
         cerr << endl << "Ошибка: " << e.what() << endl;
         return 1;

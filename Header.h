@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -9,44 +8,54 @@
 
 using namespace std;
 
-class InputException : public exception {
+// Класс для пользовательских исключений ввода
+class InputException : public exception
+{
 public:
-    InputException(const string& msg);
-    const char* what() const noexcept override;
+    InputException(const string& msg); // Конструктор с сообщением об ошибке
+    const char* what() const noexcept override; // Переопределение what()
 private:
-    string message;
+    string message; // Сообщение об ошибке
 };
 
-class checkingForInput {
+// Класс для проверки ввода
+class checkingForInput
+{
 public:
-    static int getInteger(const string& prompt, int min, int max);
-    static int getBallColor(int ballNumber);
+    static int getInteger(const string& prompt, int min, int max); // Получение целого числа в диапазоне
+    static int getBallColor(int ballNumber); // Получение цвета шарика (0-9)
 };
 
-struct Node {
-    int value;
-    Node* next;
-    Node(int val) : value(val), next(nullptr) {}
+// Узел для односвязного списка
+struct Node 
+{
+    int value;    // Значение узла
+    Node* next;   // Указатель на следующий узел
+    Node(int val) : value(val), next(nullptr) {} // Конструктор
 };
 
-class LinkedList {
+// Самописный односвязный список
+class LinkedList
+{
 public:
-    LinkedList();
-    ~LinkedList();
-    void push_back(int value);
-    bool empty() const;
-    Node* begin() const;
-    Node* end() const;
-    Node* erase(Node* first, Node* last);
+    LinkedList();  // Конструктор
+    ~LinkedList(); // Деструктор
+    void push_back(int value); // Добавление в конец
+    bool empty() const; // Проверка на пустоту
+    Node* begin() const; // Получение начала списка
+    Node* end() const;   // Получение конца списка
+    Node* erase(Node* first, Node* last); // Удаление диапазона
 private:
-    Node* head;
-    Node* tail;
+    Node* head; // Указатель на начало
+    Node* tail; // Указатель на конец
 };
 
-class BallRow {
+// Класс для работы с цепочкой шариков
+class BallRow 
+{
 public:
-    BallRow(const LinkedList& input);
-    int findAndRemoveRow();
+    BallRow(const LinkedList& input); // Конструктор с цепочкой шариков
+    int findAndRemoveRow(); // Поиск и удаление последовательностей
 private:
-    LinkedList balls;
+    LinkedList balls; // Цепочка шариков
 };
