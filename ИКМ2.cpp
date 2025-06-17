@@ -20,34 +20,32 @@
 //	(выходные данные)
 //	10
 
+#include "Header.h"
 #include <iostream>
-#include <list>
 #include <stdexcept>
 #include <string>
 #include <cctype>
 #include <sstream>
 #include <climits>
 #include <windows.h> 
-#include "Header.h"
-
-using namespace std;
 
 int main()
 {
     setlocale(LC_ALL, "Russian");
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    try
+
+    try 
     {
         cout << "=== Игра 'Шарики' ===" << endl;
         cout << "Правила: при вводе цепочки из трех и более одинаковых шариков они удаляются." << endl << endl;
 
         int n = checkingForInput::getInteger("Введите количество шариков (1-100000): ", 1, 100000);
 
-        list<int> balls;
+        LinkedList balls;
         cout << endl << "Введите цвета шариков (числа от 0 до 9):" << endl;
 
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < n; ++i) 
         {
             int color = checkingForInput::getBallColor(i + 1);
             balls.push_back(color);
@@ -57,7 +55,7 @@ int main()
         int removed = chain.findAndRemoveRow();
         cout << endl << "Количество уничтоженных шариков: " << removed << endl;
     }
-    catch (const exception& e)
+    catch (const exception& e) 
     {
         cerr << endl << "Ошибка: " << e.what() << endl;
         return 1;

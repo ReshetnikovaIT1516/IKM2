@@ -1,5 +1,5 @@
+
 #include <iostream>
-#include <list>
 #include <stdexcept>
 #include <string>
 #include <cctype>
@@ -9,26 +9,44 @@
 
 using namespace std;
 
-class InputException : public exception // Для создания пользовательских исключений, связанных с обработкой ввода данных
-
-{
+class InputException : public exception {
 public:
-    InputException(const string& msg); // Конструктор, принимающий сообщение об ошибке
+    InputException(const string& msg);
     const char* what() const noexcept override;
 private:
     string message;
 };
-class checkingForInput // Класс для проверки и обработки пользовательского ввода
-{
+
+class checkingForInput {
 public:
-    static int getInteger(const string& prompt, int min, int max); // Статический метод для получения целого числа в нужном нам диапазоне
-    static int getBallColor(int ballNumber);  // Статический метод для получения цвета шарика (0-9)
+    static int getInteger(const string& prompt, int min, int max);
+    static int getBallColor(int ballNumber);
 };
-class BallRow  // Класс для работы с рядом шариков
-{
+
+struct Node {
+    int value;
+    Node* next;
+    Node(int val) : value(val), next(nullptr) {}
+};
+
+class LinkedList {
 public:
-    BallRow(const list<int>& input);
-    int findAndRemoveRow(); // Ищем ряд из 3 и более шаров и удаляем
+    LinkedList();
+    ~LinkedList();
+    void push_back(int value);
+    bool empty() const;
+    Node* begin() const;
+    Node* end() const;
+    Node* erase(Node* first, Node* last);
 private:
-    list<int> balls;
+    Node* head;
+    Node* tail;
+};
+
+class BallRow {
+public:
+    BallRow(const LinkedList& input);
+    int findAndRemoveRow();
+private:
+    LinkedList balls;
 };
